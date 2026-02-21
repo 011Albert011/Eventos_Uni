@@ -1,15 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Eventos universitarios</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="icon" type="image/png" href="img/logo-head.png"> <!-- inocno -->
+
+    <title>EventosU</title>
 </head>
-
 <body>
+    <header>
+        <a href="index.html">
+            <img src="img/EventosU-logo-transparent.png" alt="Logo de EventosU">
+        </a>
+    </header>
+    <nav class="navegacion"><!--Barra de navegacion  -->
+        <a href="index.html">Inicio</a>
+        <a href="eventos.html">Crear Evento</a>
+        <a href="asistentes.html">Asistentes</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+    <section> <!--Busqueda y Filtros-->
+        <form>
+            <div>
+                <label for="input_buscar">Buscar: </label>
+                <input type="search" id="input_buscar" placeholder="Por titulo o sede">
+            </div>
+            <div>
+                <label for="input_filtro">filtros: </label>
+                <select id="input_filtro">
+                    <option value="" selected>Tipo de Evento</option>
+                    <option value="conferencia">Conferencia</option>
+                    <option value="taller">Taller</option>
+                    <option value="curso">Curso</option>
+                    <option value="congreso">Congreso</option>
+                </select>
+            </div>
+            <div>
+                <label for="fecha">Fecha:</label>
+                <input id="fecha" type="date">
+            </div>    
+        </form>
+    </section>
 
+    <main><!-- Cards de Eventos -->
+        <h1>Catalogo de Eventos</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Titulo: </h5>
+                <p class="card-text">Fecha: </p>
+                <p class="card-text">Tipo: </p>
+                <p class="card-text">Sede: </p>
+                <p class="card-text">Cupo restante: </p>
+                <button class=" btn btn-success"  data-bs-toggle="modal" data-bs-target="#tarjeta"> <!-- Boton de Modal -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                Inscribirme    
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="tarjeta" aria-labelledby="tarjeta"><!-- Modal -->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Datos</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <label for="nombre">Nombre: </label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Escriba su nombre" class="form-control" pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="correo@texto.com" class="form-control">
+                        <label for="telefono">Telefono</label>
+                        <input type="tel" name="telefono" id="telefono" placeholder="222222222222" class="form-control" maxlength="10" pattern="[0-9]{10}" title="solo numeros">
+                        <button type="submit" class="btn btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                        </svg>
+                        Enviar
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><!-- Boton de salir -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                            </svg>
+                        Salir    
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <hr> <div class="footer-contenido">
+        <p>EventosU - Todos los derechos reservados.</p>
+    </div>
+</footer>
+    
+    <script src="bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
