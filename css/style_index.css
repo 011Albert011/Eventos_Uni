@@ -1,0 +1,86 @@
+/*--- --- Barra de búsqueda --- --- */
+.barra-busqueda{
+    padding: 12px 20px;
+
+    font-size: 16px;
+    background-color: var(--principal);
+    color: var(--blanco);
+}
+
+
+.input-busqueda svg, .input-tipo svg, .input-fecha svg{
+    color: var(--negro);
+    position: absolute;
+    top: 6px;
+    left: 12px;
+}
+
+
+.input-busqueda, .input-tipo, .input-fecha{
+    position: relative;
+    margin-left: 5px;
+}
+
+.input-busqueda input{
+    width: 200px;
+    padding: 0 3px 0 35px;
+}
+
+
+.input-tipo select,.input-fecha input{
+    text-align: center;
+    padding: 0 0 0 30px;
+}
+
+.input-tipo select{
+    width: 170px;
+}
+
+.input-fecha input{
+    width: 150px;
+}
+
+/*--- Tarjetas de evento ---*/
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    
+    justify-items: center;
+}
+
+.card{
+    font-size: 17px;
+    border-radius: 23px !important;
+    width: 85%;
+    padding: 0 15px;
+    margin: 10px 0 40px 0;
+
+    background-color: #A4B3BD33;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card .card-title{
+    font-size: 30px !important;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--resaltado);
+
+    margin-bottom: 20px;
+}
+
+.card-button{
+    font-weight: bold;
+    letter-spacing: 1px;
+    justify-content: center;
+    width: 190px;
+}
+
+/*--- Formulario Inscripción ---*/
+.modal-inputs{
+    margin-bottom: 20px;
+}
+
+.modal-body input{
+    margin-bottom: 10px;
+}

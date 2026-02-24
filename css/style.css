@@ -25,6 +25,15 @@
     font-family: 'Inter';
 }
 
+.svg-spacing-button{
+    height: 100%;
+    margin-right: 5px;
+}
+
+.input-button{
+    width: 100px;
+}
+
 /*--- --- Header --- ---*/
 header{
     background-color: var(--principal);
@@ -68,63 +77,14 @@ main h1{
     margin: 28px 0;
 }
 
-/*--- Tarjeta de evento ---*/
-.card{
-    border-radius: 23px !important;
-    width: 48%;
-}
-
-.card .card-title{
-    font-size: 30px;
-    text-align: center;
-    font-weight: bold;
-    color: var(--resaltado);
-    margin-bottom: 15px;
-}
-
-/*--------------------------------------------------- INDEX ---------------------------------------------------*/
-/*--- --- Barra de búsqueda --- --- */
-.barra-busqueda{
-    padding: 5px 20px;
-
-    background-color: var(--principal);
+/*--- --- Footer --- ---*/
+footer{
+    height: 90px;
+    font-size: 16px;
     color: var(--blanco);
+    background-color: var(--principal);
 }
 
-
-.input-busqueda svg, .input-tipo svg, .input-fecha svg{
-    color: var(--negro);
-    position: absolute;
-    top: 6px;
-    left: 12px;
+footer p{
+    margin: 0;
 }
-
-
-.input-busqueda, .input-tipo, .input-fecha{
-    position: relative;
-    margin-left: 5px;
-}
-
-.input-busqueda input{
-    width: 200px;
-    padding: 0 3px 0 35px;
-}
-
-
-.input-tipo select,.input-fecha input{
-    text-align: center;
-    padding: 0 0 0 30px;
-}
-
-.input-tipo select{
-    width: 170px;
-}
-
-.input-fecha input{
-    width: 150px;
-}
-
-
-
-
-
