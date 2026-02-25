@@ -1,43 +1,34 @@
 /*--- --- Barra de búsqueda --- --- */
-.barra-busqueda{
-    padding: 12px 20px;
-
-    font-size: 16px;
+.barra-busqueda {
+    height: auto; 
+    font-size: 16;
+    padding: 15px 20px;
     background-color: var(--principal);
-    color: var(--blanco);
 }
 
-
-.input-busqueda svg, .input-tipo svg, .input-fecha svg{
+.input-busqueda svg, .input-fecha svg, .input-tipo svg {
     color: var(--negro);
     position: absolute;
-    top: 6px;
-    left: 12px;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    z-index: 5;
+    pointer-events: none;
 }
 
-
-.input-busqueda, .input-tipo, .input-fecha{
+.input-busqueda, .input-tipo, .input-fecha {
     position: relative;
-    margin-left: 5px;
+    width: 100%;
 }
 
-.input-busqueda input{
-    width: 100% !important;
-    padding: 0 3px 0 35px;
+.input-busqueda input, .input-tipo select, .input-fecha input {
+    width: 100% !important; 
+    height: 40px;
+    padding-left: 45px !important; 
 }
 
-
-.input-tipo select,.input-fecha input{
+.input-tipo select, .input-fecha input{
     text-align: center;
-    padding: 0 0 0 30px;
-}
-
-.input-tipo select{
-    width: 100% !important;
-}
-
-.input-fecha input{
-    width: 100% !important;
 }
 
 /*--- Tarjetas de evento ---*/
@@ -46,6 +37,7 @@
     grid-template-columns: 1fr;
     
     justify-items: center;
+    margin-bottom: 20px;
 }
 
 .card{
@@ -64,7 +56,8 @@
         grid-template-columns: repeat(2, 1fr);
     }
     .card {
-        width: 85%; /* Mantiene el diseño original en PC */
+        width: 85%; 
+        max-width: 500px;
     }
 }
 
