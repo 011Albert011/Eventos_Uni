@@ -16,25 +16,25 @@
             <img src="img/EventosU-logo-transparent.png" alt="Logo de EventosU">
         </a>
     </header>
-    <nav class="navegacion d-flex align-items-center justify-content-around"><!--Barra de navegacion  -->
+    <nav class="navegacion d-flex flex-wrap align-items-center justify-content-around"><!--Barra de navegacion  -->
         <a href="index.html" class="selected-page">Inicio</a>
         <a href="eventos.html">Crear Evento</a>
         <a href="asistentes.html">Asistentes</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="contactos.html">Contacto</a>
     </nav>
     <section class="barra-busqueda container-fluid"> <!--Busqueda y Filtros-->
         <form class="row g-3 align-items-center">
-            <div class="col-6 d-flex flex-wrap">
+            <div class="col-12 col-md-6 d-flex flex-wrap">
                 <label for="input_buscar">Buscar: </label>
                 <div class="input-busqueda">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                     </svg>
 
-                    <input type="search" id="input_buscar" placeholder="Por título o sede" class="rounded-pill">
+                    <input type="search" id="input_buscar" placeholder="Por título o sede" class="rounded-pill w-100">
                 </div>
             </div>
-            <div class="col-3 d-flex flex-wrap justify-content-end">
+            <div class="col-12 col-md-3 d-flex flex-wrap justify-content-md-end">
                 <label for="input_filtro">Filtros: </label>
                 <div class="input-tipo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
@@ -50,7 +50,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-3 d-flex flex-wrap justify-content-end">
+            <div class="col-12 col-md-3 d-flex justify-content-md-end">
                 <label for="fecha">Fecha:</label>
                 <div class="input-fecha">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
@@ -82,7 +82,34 @@
                 </div>
             </div>
 
-            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Título</h5>
+                    <p class="card-text"><b>Fecha:</b> </p>
+                    <p class="card-text"><b>Tipo:</b> </p>
+                    <p class="card-text"><b>Sede:</b> </p>
+                    <p class="card-text"><b>Cupo restante:</b> </p>
+                    <div class="text-end">
+                        <button class="card-button btn btn-success"  data-bs-toggle="modal" data-bs-target="#tarjeta"> <!-- Boton de Modal -->
+                            Inscribirme   
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Título</h5>
+                    <p class="card-text"><b>Fecha:</b> </p>
+                    <p class="card-text"><b>Tipo:</b> </p>
+                    <p class="card-text"><b>Sede:</b> </p>
+                    <p class="card-text"><b>Cupo restante:</b> </p>
+                    <div class="text-end">
+                        <button class="card-button btn btn-success"  data-bs-toggle="modal" data-bs-target="#tarjeta"> <!-- Boton de Modal -->
+                            Inscribirme   
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
