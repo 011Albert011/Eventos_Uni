@@ -1,67 +1,79 @@
-// Variable para identificar el evento seleccionado por el usuario
+// Variable para el ID del evento
 let idEventoSeleccionado = null;
 
-// Funcion que se activa al dar clic en Inscribirme para capturar el ID
+// Captura el ID al dar clic en el boton de la card
 function prepararInscripcion(id) {
     idEventoSeleccionado = id;
-    console.log("Evento seleccionado ID:", idEventoSeleccionado);
+    console.log("ID guardado:", idEventoSeleccionado);
 }
 
-// Escucha el envio del formulario en el modal
+// Escucha el envio del formulario
 document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Evita que la pagina se recargue [cite: 39]
+    e.preventDefault(); 
 
-    // Captura de datos de los campos Nombre, Email y Telefono [cite: 19, 36]
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const telefono = document.getElementById('telefono').value;
+    // Captura valores y limpia espacios en blanco
+    const nombre = document.getElementById('nombre').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
 
-    // Recuperacion de datos de eventos y asistentes del localStorage [cite: 41]
-    let eventos = JSON.parse(localStorage.getItem('eventosU'));
+    // Validacion: Si falta algun dato, se detiene aqui
+    if (!nombre || !email || !telefono) {
+        alert("Por favor, llena todos los campos antes de enviar.");
+        return; 
+    }
+
+    // Validacion: Verifica que el telefono tenga 10 digitos
+    if (telefono.length !== 10 || isNaN(telefono)) {
+        alert("El telefono debe tener 10 numeros.");
+        return;
+    }
+
+    // Obtiene datos del almacenamiento local
+    let eventos = JSON.parse(localStorage.getItem('eventosU')) || [];
     let asistentes = JSON.parse(localStorage.getItem('asistentesU')) || [];
 
-    // Localizacion del evento especifico por su ID
+    // Busca el evento seleccionado
     const evento = eventos.find(ev => ev.id === idEventoSeleccionado);
 
-    // Validacion de disponibilidad de cupo [cite: 43, 68]
-    if (evento.cupo <= 0) {
-        alert("Lo sentimos, este evento ya no tiene cupos disponibles.");
+    // Revisa si todavia hay lugares
+    if (!evento || evento.cupo <= 0) {
+        alert("Ya no hay cupos para este evento.");
         return;
     }
 
-    // Validacion para evitar correos duplicados en el mismo evento [cite: 46, 70]
-    const yaRegistrado = asistentes.find(as => as.idEvento === idEventoSeleccionado && as.email === email);
-    if (yaRegistrado) {
-        alert("Este correo ya esta registrado para este evento.");
+    // Revisa si el correo ya existe en este evento
+    const duplicado = asistentes.find(as => as.idEvento === idEventoSeleccionado && as.email === email);
+    if (duplicado) {
+        alert("Este correo ya esta registrado aqui.");
         return;
     }
 
-    // Creacion del objeto para el nuevo asistente [cite: 45]
+    // Crea el objeto del nuevo asistente
     const nuevoAsistente = {
         id: Date.now(),
         idEvento: idEventoSeleccionado,
         nombre: nombre,
         email: email,
         telefono: telefono,
-        estado: "Pendiente" // Estado inicial requerido por el sistema [cite: 32, 60]
+        estado: "Pendiente" 
     };
 
-    // Almacenamiento del asistente y actualizacion del cupo [cite: 45, 47]
+    // Guarda al asistente y actualiza el cupo
     asistentes.push(nuevoAsistente);
     localStorage.setItem('asistentesU', JSON.stringify(asistentes));
 
-    evento.cupo -= 1; // Descuento de un lugar en el cupo 
+    evento.cupo -= 1; 
     localStorage.setItem('eventosU', JSON.stringify(eventos));
 
-    // Confirmacion de exito y limpieza de interfaz [cite: 38]
-    alert("Inscripcion exitosa.");
+    alert("¡Inscripcion exitosa!");
     
+    // Limpia el formulario y cierra el modal
     this.reset();
     const modalElement = document.getElementById('tarjeta');
     const modal = bootstrap.Modal.getInstance(modalElement);
-    modal.hide();
+    if (modal) modal.hide();
 
-    // Refresca las tarjetas en el Index para mostrar el nuevo cupo [cite: 16]
+    // Actualiza las cards en el index
     if (typeof renderizarEventos === 'function') {
         renderizarEventos();
     }
