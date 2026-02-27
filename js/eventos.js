@@ -1,20 +1,19 @@
-// 1. Datos semilla para el sistema
+// 1. Datos iniciales (Semilla)
 const eventosBase = [
     { id: 1, titulo: "Conferencia de IA - BUAP", fecha: "2026-03-15", hora: "20:00", sede: "Auditorio ICC", tipo: "conferencia", cupo: 50 },
     { id: 2, titulo: "Taller de Bootstrap 5", fecha: "2026-03-20", hora: "23:00", sede: "Laboratorio 3", tipo: "taller", cupo: 20 },
     { id: 3, titulo: "Congreso de Software", fecha: "2026-04-10", hora: "02:00", sede: "CCU BUAP", tipo: "congreso", cupo: 100 }
 ];
 
-// 2. Logica para asegurar persistencia en localStorage
+// 2. Asegura que existan datos en el LocalStorage al abrir la página
 function cargarSistema() {
     const datosGuardados = localStorage.getItem('eventosU');
     if (!datosGuardados) {
         localStorage.setItem('eventosU', JSON.stringify(eventosBase));
-        console.log("Sistema Inicializado.");
     }
 }
 
-// 3. Renderizado de tarjetas en el HTML
+// 3. Dibuja las tarjetas en el HTML
 function renderizarEventos(listaFiltrada = null) {
     const contenedor = document.getElementById('contenedor-eventos');
     const todosLosEventos = JSON.parse(localStorage.getItem('eventosU'));
@@ -22,14 +21,15 @@ function renderizarEventos(listaFiltrada = null) {
 
     contenedor.innerHTML = '';
 
-if (eventosAMostrar.length === 0) {
-    contenedor.innerHTML = `
-        <p class="text-dark text-center py-5" 
-        style="grid-column: 1 / -1; width: 100%; font-weight: bold;">
-        No se encontraron eventos.
-        </p>`;
-    return; 
-}
+    // Si no hay resultados, mostramos el mensaje centrado en el Grid
+    if (eventosAMostrar.length === 0) {
+        contenedor.innerHTML = `
+            <p class="text-dark text-center py-5" 
+               style="grid-column: 1 / -1; width: 100%; font-weight: bold;">
+               No se encontraron eventos.
+            </p>`;
+        return; 
+    }
 
     eventosAMostrar.forEach(evento => {
         const cardHTML = `
@@ -56,7 +56,7 @@ if (eventosAMostrar.length === 0) {
     });
 }
 
-// 4. Logica de busqueda y filtros
+// 4. Lógica de los filtros (Buscador)
 function aplicarFiltros() {
     const todosLosEventos = JSON.parse(localStorage.getItem('eventosU'));
     const textoBusqueda = document.getElementById('input_buscar').value.toLowerCase();
@@ -74,74 +74,13 @@ function aplicarFiltros() {
     renderizarEventos(filtrados);
 }
 
-// 5. Inicializacion de eventos y listeners
+// 5. Inicio del script al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
     cargarSistema();
     renderizarEventos();
 
+    // Listeners para búsqueda en tiempo real e interacción
     document.getElementById('input_buscar').addEventListener('input', aplicarFiltros);
     document.getElementById('input_filtro').addEventListener('change', aplicarFiltros);
     document.querySelector('input[type="date"]').addEventListener('change', aplicarFiltros);
-});
-
-// Variable para el control del evento seleccionado
-let idEventoSeleccionado = null;
-
-// Captura el ID del evento al abrir el modal
-function prepararInscripcion(id) {
-    idEventoSeleccionado = id;
-    console.log("Evento seleccionado ID:", idEventoSeleccionado);
-}
-
-// Registro de asistentes y validaciones
-document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const telefono = document.getElementById('telefono').value;
-
-    let eventos = JSON.parse(localStorage.getItem('eventosU'));
-    let asistentes = JSON.parse(localStorage.getItem('asistentesU')) || [];
-    const evento = eventos.find(ev => ev.id === idEventoSeleccionado);
-
-    // Validacion de cupo disponible
-    if (evento.cupo <= 0) {
-        alert("Lo sentimos, este evento ya no tiene cupos disponibles.");
-        return;
-    }
-
-    // Validacion de correo duplicado en el mismo evento
-    const yaRegistrado = asistentes.find(as => as.idEvento === idEventoSeleccionado && as.email === email);
-    if (yaRegistrado) {
-        alert("Este correo ya esta registrado para este evento.");
-        return;
-    }
-
-    // Guardado de nuevo asistente
-    const nuevoAsistente = {
-        id: Date.now(),
-        idEvento: idEventoSeleccionado,
-        nombre: nombre,
-        email: email,
-        telefono: telefono,
-        estado: "Pendiente"
-    };
-
-    asistentes.push(nuevoAsistente);
-    localStorage.setItem('asistentesU', JSON.stringify(asistentes));
-
-    // Actualizacion de cupo en el evento
-    evento.cupo -= 1;
-    localStorage.setItem('eventosU', JSON.stringify(eventos));
-
-    alert("Inscripcion exitosa.");
-    
-    this.reset();
-    const modalElement = document.getElementById('tarjeta');
-    const modal = bootstrap.Modal.getInstance(modalElement);
-    modal.hide();
-
-    // Refrescar cards para mostrar cupo actualizado
-    renderizarEventos();
 });

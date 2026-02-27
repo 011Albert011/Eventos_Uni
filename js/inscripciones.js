@@ -1,54 +1,52 @@
-// Variable para el ID del evento
+// 1. Variable global para recordar qué evento seleccionó el usuario
 let idEventoSeleccionado = null;
 
-// Captura el ID al dar clic en el boton de la card
+// 2. Función que se dispara desde el botón "Inscribirme" de la tarjeta
 function prepararInscripcion(id) {
     idEventoSeleccionado = id;
-    console.log("ID guardado:", idEventoSeleccionado);
+    console.log("ID del evento para inscribir:", idEventoSeleccionado);
 }
 
-// Escucha el envio del formulario
+// 3. Lógica del Formulario de Inscripción
 document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
-    e.preventDefault(); 
+    e.preventDefault(); // Evita que la página se recargue
 
-    // Captura valores y limpia espacios en blanco
+    // Captura y limpieza de espacios
     const nombre = document.getElementById('nombre').value.trim();
     const email = document.getElementById('email').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
 
-    // Validacion: Si falta algun dato, se detiene aqui
+    // Validación de campos vacíos
     if (!nombre || !email || !telefono) {
         alert("Por favor, llena todos los campos antes de enviar.");
         return; 
     }
 
-    // Validacion: Verifica que el telefono tenga 10 digitos
+    // Validación de teléfono (exactamente 10 dígitos numéricos)
     if (telefono.length !== 10 || isNaN(telefono)) {
-        alert("El telefono debe tener 10 numeros.");
+        alert("El teléfono debe tener 10 números.");
         return;
     }
 
-    // Obtiene datos del almacenamiento local
+    // Carga de datos del LocalStorage
     let eventos = JSON.parse(localStorage.getItem('eventosU')) || [];
     let asistentes = JSON.parse(localStorage.getItem('asistentesU')) || [];
-
-    // Busca el evento seleccionado
     const evento = eventos.find(ev => ev.id === idEventoSeleccionado);
 
-    // Revisa si todavia hay lugares
+    // Validación de Cupo
     if (!evento || evento.cupo <= 0) {
         alert("Ya no hay cupos para este evento.");
         return;
     }
 
-    // Revisa si el correo ya existe en este evento
+    // Validación de Correo Duplicado en el mismo evento
     const duplicado = asistentes.find(as => as.idEvento === idEventoSeleccionado && as.email === email);
     if (duplicado) {
-        alert("Este correo ya esta registrado aqui.");
+        alert("Este correo ya está registrado en este evento.");
         return;
     }
 
-    // Crea el objeto del nuevo asistente
+    // Creación del nuevo asistente con ID único (Date.now)
     const nuevoAsistente = {
         id: Date.now(),
         idEvento: idEventoSeleccionado,
@@ -58,22 +56,23 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
         estado: "Pendiente" 
     };
 
-    // Guarda al asistente y actualiza el cupo
+    // Guardado persistente
     asistentes.push(nuevoAsistente);
     localStorage.setItem('asistentesU', JSON.stringify(asistentes));
 
+    // Descontar cupo y guardar actualización
     evento.cupo -= 1; 
     localStorage.setItem('eventosU', JSON.stringify(eventos));
 
-    alert("¡Inscripcion exitosa!");
+    alert("¡Inscripción exitosa!");
     
-    // Limpia el formulario y cierra el modal
+    // Limpieza y cierre del modal
     this.reset();
     const modalElement = document.getElementById('tarjeta');
     const modal = bootstrap.Modal.getInstance(modalElement);
     if (modal) modal.hide();
 
-    // Actualiza las cards en el index
+    // Actualizar las tarjetas del index en tiempo real
     if (typeof renderizarEventos === 'function') {
         renderizarEventos();
     }
