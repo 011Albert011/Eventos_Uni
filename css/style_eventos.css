@@ -1,39 +1,35 @@
 /*--- Eventos ---*/
 .container__eventos {
     background-color: #F4F7F9;
+    justify-self: center;
     width: 70%;
     max-width: 800px;
     padding: 60px 115px;
+    margin-bottom: 40px;
     border-radius: 10px;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-.eventos__campo label {
-    padding-bottom: 8px;
+.eventos__form {
     font-size: 17px;
 }
 
-.eventos__campo input,
-.eventos__campo select {
-    background-color: var(--blanco);
-    border: none;
-    border-radius: 2px;
+.eventos__form label,
+.eventos__form input,
+.eventos__form select {
+    margin-bottom: 10px;
+}
+
+.eventos__form input,
+.eventos__form select,
+.eventos__form textarea {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     color: #828282;
-    font-size: 17px;
-    width: 100%;
-    height: 35px;
 }
-
-.eventos__campo input::placeholder {
-    color: #828282;
-}
-
 
 .eventos__enviar input{
     background-color: var(--resaltado);
-    border: none;
-    border-radius: 2.5px;
+    border-radius: 3px;
     font-family: 'Inter bold';
     font-size: 19px;
     color: var(--blanco);
@@ -41,21 +37,15 @@
     height: 40px;
 }
 
+.eventos__form textarea {
+    height: 293px;
+    margin-bottom: 25px;
+}
+
 /*--- MediaQueries ---*/
 @media (max-width: 768px) {
     .container__eventos {
-        width: 90%;
-        max-width: 400px;
-        padding: 20px;
-    }
-
-    .eventos__campo label {
-        padding-bottom: 7px;
-        font-size: 15px;
-    }
-
-    .eventos__campo input,
-    .eventos__campo select {
-        font-size: 15px;
+        width: 95%;
+        padding: 30px 20px;
     }
 }
