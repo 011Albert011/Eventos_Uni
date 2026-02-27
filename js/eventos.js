@@ -1,11 +1,11 @@
-// 1. Datos iniciales (Semilla)
+// 1. Datos iniciales
 const eventosBase = [
     { id: 1, titulo: "Conferencia de IA - BUAP", fecha: "2026-03-15", hora: "20:00", sede: "Auditorio ICC", tipo: "conferencia", cupo: 50 },
     { id: 2, titulo: "Taller de Bootstrap 5", fecha: "2026-03-20", hora: "23:00", sede: "Laboratorio 3", tipo: "taller", cupo: 20 },
     { id: 3, titulo: "Congreso de Software", fecha: "2026-04-10", hora: "02:00", sede: "CCU BUAP", tipo: "congreso", cupo: 100 }
 ];
 
-// 2. Asegura que existan datos en el LocalStorage al abrir la página
+// 2. Asegura que existan datos en el LocalStorage al abrir la pagina
 function cargarSistema() {
     const datosGuardados = localStorage.getItem('eventosU');
     if (!datosGuardados) {
@@ -21,12 +21,12 @@ function renderizarEventos(listaFiltrada = null) {
 
     contenedor.innerHTML = '';
 
-    // Si no hay resultados, mostramos el mensaje centrado en el Grid
+    // Si no hay resultados
     if (eventosAMostrar.length === 0) {
         contenedor.innerHTML = `
             <p class="text-dark text-center py-5" 
-               style="grid-column: 1 / -1; width: 100%; font-weight: bold;">
-               No se encontraron eventos.
+                style="grid-column: 1 / -1; width: 100%; font-weight: bold;">
+                No se encontraron eventos.
             </p>`;
         return; 
     }
@@ -56,7 +56,7 @@ function renderizarEventos(listaFiltrada = null) {
     });
 }
 
-// 4. Lógica de los filtros (Buscador)
+// 4. Logica de los filtros (Buscador)
 function aplicarFiltros() {
     const todosLosEventos = JSON.parse(localStorage.getItem('eventosU'));
     const textoBusqueda = document.getElementById('input_buscar').value.toLowerCase();

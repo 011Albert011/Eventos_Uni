@@ -1,13 +1,13 @@
-// 1. Variable global para recordar qué evento seleccionó el usuario
+//Variable global para recordar qué evento seleccionO el usuario
 let idEventoSeleccionado = null;
 
-// 2. Función que se dispara desde el botón "Inscribirme" de la tarjeta
+// FunciOn que se dispara desde el botón INCRIRME
 function prepararInscripcion(id) {
     idEventoSeleccionado = id;
     console.log("ID del evento para inscribir:", idEventoSeleccionado);
 }
 
-// 3. Lógica del Formulario de Inscripción
+// 3. Lógica del Formulario de InscripciON
 document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
     e.preventDefault(); // Evita que la página se recargue
 
@@ -16,13 +16,13 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
 
-    // Validación de campos vacíos
+    // Validación de campos vacios
     if (!nombre || !email || !telefono) {
         alert("Por favor, llena todos los campos antes de enviar.");
         return; 
     }
 
-    // Validación de teléfono (exactamente 10 dígitos numéricos)
+    // Validación de telefono
     if (telefono.length !== 10 || isNaN(telefono)) {
         alert("El teléfono debe tener 10 números.");
         return;
@@ -33,18 +33,18 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
     let asistentes = JSON.parse(localStorage.getItem('asistentesU')) || [];
     const evento = eventos.find(ev => ev.id === idEventoSeleccionado);
 
-    // Validación de Cupo
+    // Validacion de Cupo
     if (!evento || evento.cupo <= 0) {
         alert("Ya no hay cupos para este evento.");
         return;
     }
 
-   // Validación de Correo Duplicado (Ignorando mayúsculas/minúsculas)
+   // Validación de Correo Duplicado 
     const emailNormalizado = email.toLowerCase(); // Convertimos el input actual
 
     const duplicado = asistentes.find(as => 
         as.idEvento === idEventoSeleccionado && 
-     as.email.toLowerCase() === emailNormalizado // Comparamos ambos en minúsculas
+     as.email.toLowerCase() === emailNormalizado // Comparamos ambos en minusculas
     );
 
     if (duplicado) {
@@ -52,7 +52,7 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
         return;
     }
 
-    // Creación del nuevo asistente con ID único 
+    // Creación del nuevo asistente con ID unico 
     const nuevoAsistente = {
         id: Date.now(),
         idEvento: idEventoSeleccionado,
@@ -66,7 +66,7 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
     asistentes.push(nuevoAsistente);
     localStorage.setItem('asistentesU', JSON.stringify(asistentes));
 
-    // Descontar cupo y guardar actualización
+    // Descontar cupo y guardar actualizacion
     evento.cupo -= 1; 
     localStorage.setItem('eventosU', JSON.stringify(eventos));
 
