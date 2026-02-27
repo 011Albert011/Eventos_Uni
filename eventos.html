@@ -8,12 +8,12 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/style_eventos.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style_eventos.css" />
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body>
     <header class="d-flex align-items-center justify-content-center">
       <a href="index.html">
         <img src="img/EventosU-logo-transparent.png" alt="Logo" />
@@ -27,79 +27,65 @@
       <a href="contacto.html">Contacto</a>
     </nav>
 
-    <main class="flex-grow-1 d-flex flex-column align-items-center">
+    <main>
       <h1>Crear Evento</h1>
 
       <div class="container__eventos">
-        <form id="form-evento" class="d-flex flex-column gap-4">
-          <div class="eventos__campo">
-            <!-- div de campo -->
-            <label>Titulo del evento :</label>
-            <input
-              type="text"
-              id="titulo"
-              placeholder="Escribe el título del evento"
-              required
-            />
-          </div>
+        <form class="eventos__form d-flex flex-column" id="form-evento">
+ 
+          <label>Titulo del evento :</label>
+          <input
+            class="form-control"
+            type="text"
+            id="titulo"
+            placeholder="Escribe el título del evento"
+            required
+          >
 
-          <div class="eventos__campo">
-            <!-- div de campo -->
-            <label>Tipo de evento :</label>
-            <select id="tipo" required>
-              <option value="" disabled selected>--Seleccionar tipo--</option>
-              <option value="conferencia">Conferencia</option>
-              <option value="taller">Taller</option>
-              <option value="curso">Curso</option>
-              <option value="congreso">Congreso</option>
-            </select>
-          </div>
+          <label>Tipo de evento :</label>
+          <select class="form-control" id="tipo" required>
+            <option value="" disabled selected>--Seleccionar tipo--</option>
+            <option value="conferencia">Conferencia</option>
+            <option value="taller">Taller</option>
+            <option value="curso">Curso</option>
+            <option value="congreso">Congreso</option>
+          </select>
 
-          <div class="eventos__campo">
-            <!-- div de campo -->
-            <label>Fecha y hora :</label>
-            <input type="datetime-local" id="fecha" required />
-          </div>
+          <label>Fecha y hora :</label>
+          <input class="form-control" id="fecha" type="datetime-local" required />
 
-          <div class="eventos__campo">
-            <!-- div de campo -->
-            <label>Sede :</label>
-            <select id="sede" required>
-              <option value="" disabled selected>--Seleccionar sede--</option>
-              <option value="Auditorio ICC">Auditorio ICC</option>
-              <option value="Laboratorio 3">Laboratorio 3</option>
-              <option value="CCU BUAP">CCU BUAP</option>
-              <option value="Aula Magna FCC">Aula Magna FCC</option>
-            </select>
-          </div>
+          <label>Sede :</label>
+          <select class="form-control" id="sede" required>
+            <option value="" disabled selected>--Seleccionar sede--</option>
+            <option value="Auditorio ICC">Auditorio ICC</option>
+            <option value="Laboratorio 3">Laboratorio 3</option>
+            <option value="CCU BUAP">CCU BUAP</option>
+            <option value="Aula Magna FCC">Aula Magna FCC</option>
+          </select>
 
-          <div class="eventos__campo">
-            <!-- div de campo -->
-            <label>Cupo máximo :</label>
-            <input
-              type="number"
-              id="cupo"
-              min="10"
-              max="50"
-              required
-              placeholder="Elige un número entre 10 y 50"
-            />
-          </div>
+          <label>Cupo máximo :</label>
+          <input
+            class="form-control"
+            type="number"
+            id="cupo"
+            min="10"
+            max="50"
+            required
+            placeholder="Elige un número entre 10 y 50"
+          >
 
-          <div class="eventos__campo">
-            <label>Descripción :</label>
-            <input
-              type="text-area"
-              id="descripcion"
-              placeholder="Añade una descripción del evento"
-              required
-            />
-          </div>
-          <!-- fin div campos -->
+          <label for="descripcion">Descripción :</label>
+          <textarea 
+            class="form-control"
+            id="descripcion" 
+            placeholder="Añade una descripción del evento" 
+            required
+            rows="4"
+          ></textarea>
 
+          <!-- div del botón enviar -->
           <div class="eventos__enviar align-self-end">
-            <!-- div del botón enviar -->
-            <input type="submit" value="Enviar" />
+            <input class="form-control" type="submit" value="Enviar" />
           </div>
         </form>
       </div>
