@@ -39,14 +39,20 @@ document.querySelector('#tarjeta form').addEventListener('submit', function(e) {
         return;
     }
 
-    // Validación de Correo Duplicado en el mismo evento
-    const duplicado = asistentes.find(as => as.idEvento === idEventoSeleccionado && as.email === email);
+   // Validación de Correo Duplicado (Ignorando mayúsculas/minúsculas)
+    const emailNormalizado = email.toLowerCase(); // Convertimos el input actual
+
+    const duplicado = asistentes.find(as => 
+        as.idEvento === idEventoSeleccionado && 
+     as.email.toLowerCase() === emailNormalizado // Comparamos ambos en minúsculas
+    );
+
     if (duplicado) {
         alert("Este correo ya está registrado en este evento.");
         return;
     }
 
-    // Creación del nuevo asistente con ID único (Date.now)
+    // Creación del nuevo asistente con ID único 
     const nuevoAsistente = {
         id: Date.now(),
         idEvento: idEventoSeleccionado,
